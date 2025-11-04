@@ -1,0 +1,176 @@
+.chatgpt-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #0d0d0d;
+  color: #e8e8e8;
+  font-family: "Inter", sans-serif;
+
+  /* Scrollable messages */
+  .chatgpt-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+
+    .no_data {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60vh;
+
+      h2 {
+        font-family: cursive;
+      }
+    }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #333;
+      border-radius: 10px;
+    }
+  }
+
+  /* Message container */
+  .chatgpt-message {
+    display: flex;
+    margin-bottom: 20px;
+    width: 100%;
+    // left side ai message 
+    &.ai {
+      justify-content: flex-start;
+
+      .chatgpt-bubble {
+        background-color: #1a1a1a;
+        border: 1px solid #2a2a2a;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.05);
+      }
+    }
+
+    // right side user message
+    &.user {
+      justify-content: flex-end;
+
+      .chatgpt-bubble {
+        // background: linear-gradient(135deg, #0078ff, #00bfff);
+        background-color: rgba(215, 9, 115, 0.893);
+        color: #fff;
+      }
+    }
+  }
+
+  /* ✅ Chat bubble with Markdown + Code support */
+  .chatgpt-bubble {
+    max-width: 80%;
+    border-radius: 10px;
+    padding: 12px 16px;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    line-height: 1.5;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.3s ease-in-out;
+
+    &.typing {
+      font-style: italic;
+      opacity: 0.7;
+    }
+
+    /* ✅ Code block styling */
+    pre {
+      background: #101010;
+      padding: 10px;
+      border-radius: 8px;
+      overflow-x: auto;
+      max-width: 100%;
+      margin-top: 8px;
+    }
+
+    pre::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    pre::-webkit-scrollbar-thumb {
+      background: #3b3b3b;
+      border-radius: 10px;
+    }
+
+    code {
+      font-family: "Fira Code", monospace;
+      font-size: 14px;
+      color: #00eaff;
+      overflow-wrap: break-word;
+      white-space: pre-wrap;
+    }
+  }
+
+  /* Bottom input area */
+  .chatgpt-input-area {
+    background-color: #0f0f0f;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: sticky;
+    bottom: 0;
+
+    textarea {
+      flex: 1;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 14px;
+      background-color: #1a1a1a;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      resize: none;
+      min-height: 44px;
+      max-height: 120px;
+      overflow-y: auto;
+
+      &:focus {
+        border: 1px solid #00bfff;
+        box-shadow: 0 0 8px rgba(0, 191, 255, 0.3);
+      }
+    }
+
+    button {
+      background: linear-gradient(135deg, #00bfff, #0078ff);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      padding: 10px 16px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,319 @@
+.resume_builder_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
+  background: #151515;
+  font-family: "Poppins", sans-serif;
+
+  .resume_right_side {
+    background: #0f172a;
+    width: 550px;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+
+    .form-title {
+      font-size: 1.8rem;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+
+      label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: #ffffff;
+      }
+
+      input {
+        padding: 11px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        background-color: transparent;
+        color: #ffffff;
+        font-size: 1rem;
+        transition: all 0.3s;
+
+        &:focus {
+          border-color: #007bff;
+          outline: none;
+          box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+      }
+    }
+
+    h3 {
+      margin-top: 1.5rem;
+      color: #ffffff;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .array-input {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+
+      input {
+        background-color: transparent;
+        flex: 1;
+        padding: 11px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        color: #ffffff;
+        font-size: 1rem;
+        transition: all 0.3s;
+
+        &:focus {
+          border-color: #007bff;
+          outline: none;
+          box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+      }
+
+      .add-btn,
+      .remove-btn {
+        background: #151515;
+        border: none;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.2s all;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          font-size: 1.5rem;
+          color: white;
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      .remove-btn {
+        background: #b60d8e;
+      }
+    }
+  }
+
+  .resume_left_side {
+    flex: 1 1 500px;
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .resume_card {
+      background: white;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      position: relative;
+
+      h1.resume_name {
+        font-size: 2rem;
+        color: rgb(83, 83, 237);
+        margin-bottom: 0.2rem;
+        font-weight: 700;
+      }
+
+      p {
+        color: #0d0d0d;
+        margin: 0.2rem 0;
+      }
+
+      hr {
+        border: 0;
+        border-top: 1px solid #ddd;
+        margin: 1rem 0;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+        color: #007bff;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      ul {
+        list-style: inside disc;
+        padding-left: 0.5rem;
+
+        li {
+          margin-bottom: 0.3rem;
+          color: #0d0d0d;
+        }
+      }
+    }
+
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+
+      button {
+        flex: 1;
+        padding: 0.7rem;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.3s;
+
+        &.save-btn {
+          background: #007bff;
+          color: white;
+
+          &:hover {
+            background: #0069d9;
+          }
+        }
+
+        &.download-btn {
+          background: #151515;
+          color: white;
+
+          &:hover {
+            background: #0d0d0d;
+          }
+        }
+      }
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+    align-items: center;
+
+    .resume_right_side,
+    .resume_left_side {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .resume_right_side,
+    .resume_left_side {
+      padding: 1.5rem;
+    }
+
+    .resume_left_side {
+      .resume_card {
+        padding: 1.5rem;
+
+        h1.resume_name {
+          font-size: 1.8rem;
+        }
+
+        h2 {
+          font-size: 1.2rem;
+        }
+      }
+
+      .button-group button {
+        flex: 1 1 100%;
+      }
+    }
+
+    .resume_right_side {
+      .input-group input,
+      .array-input input {
+        font-size: 0.95rem;
+        padding: 0.45rem 0.6rem;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .resume_right_side,
+    .resume_left_side {
+      padding: 1rem;
+    }
+
+    .resume_left_side {
+      .resume_card {
+        padding: 1rem;
+
+        h1.resume_name {
+          font-size: 1.5rem;
+        }
+
+        h2 {
+          font-size: 1.1rem;
+        }
+      }
+
+      .button-group {
+        flex-direction: column;
+        gap: 0.5rem;
+
+        button {
+          flex: 1 1 100%;
+          padding: 0.6rem;
+          font-size: 0.95rem;
+        }
+      }
+    }
+
+    .resume_right_side {
+      .input-group input,
+      .array-input input {
+        font-size: 0.9rem;
+        padding: 0.35rem 0.5rem;
+      }
+    }
+  }
+
+  @media (max-width: 360px) {
+    .resume_right_side,
+    .resume_left_side {
+      padding: 0.8rem;
+    }
+
+    .resume_left_side {
+      .resume_card {
+        padding: 0.8rem;
+
+        h1.resume_name {
+          font-size: 1.4rem;
+        }
+
+        h2 {
+          font-size: 1rem;
+        }
+      }
+
+      .button-group button {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+      }
+    }
+
+    .resume_right_side {
+      .input-group input,
+      .array-input input {
+        font-size: 0.85rem;
+        padding: 0.3rem 0.5rem;
+      }
+    }
+  }
+}

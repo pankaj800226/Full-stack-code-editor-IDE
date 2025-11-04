@@ -1,0 +1,242 @@
+.compiler-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #1e1e1e;
+  color: #ffffff;
+  font-family: "Fira Code", monospace;
+
+  /* ---------- Header ---------- */
+  .compiler-header {
+    background: #252526;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1.2rem;
+    border-bottom: 1px solid #3a3a3a;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+
+    h1 {
+      font-size: 1.2rem;
+      color: #61dafb;
+      margin: 0;
+    }
+
+    .compiler-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+
+      /* ---------- Custom Dropdown ---------- */
+      .language-dropdown {
+        position: relative;
+        background: #2d2d2d;
+        border: 1px solid #3c3c3c;
+        border-radius: 6px;
+        padding: 0.5rem 0.8rem;
+        cursor: pointer;
+        user-select: none;
+        min-width: 150px;
+        transition: 0.3s;
+
+        &:hover {
+          border-color: #007acc;
+        }
+
+        .selected-lang {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 0.95rem;
+        }
+
+        .dropdown-list {
+          position: absolute;
+          top: 105%;
+          left: 0;
+          background: #2a2a2a;
+          width: 100%;
+          border: 1px solid #3c3c3c;
+          border-radius: 6px;
+          overflow: hidden;
+          max-height: 0;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          z-index: 10;
+
+          &.open {
+            max-height: 200px;
+            opacity: 1;
+            visibility: visible;
+          }
+
+          li {
+            padding: 0.5rem 0.8rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ddd;
+            transition: 0.2s;
+
+            &:hover {
+              background: #007acc33;
+              color: #61dafb;
+            }
+
+            &.active {
+              background: #007acc55;
+              color: #61dafb;
+            }
+          }
+        }
+      }
+
+      button {
+        background: #007acc;
+        border: none;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          background: #1494ff;
+          transform: scale(1.05);
+        }
+
+        &:disabled {
+          background: #555;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  /* ---------- Mobile toggle ---------- */
+  .mobile-toggle {
+    display: none;
+    background: #252526;
+    border-bottom: 1px solid #3a3a3a;
+    padding: 0.5rem;
+    justify-content: space-around;
+
+    button {
+      flex: 1;
+      background: transparent;
+      color: #ccc;
+      border: none;
+      padding: 0.6rem 0;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: 0.3s;
+      border-bottom: 2px solid transparent;
+
+      &.active {
+        color: #61dafb;
+        border-bottom: 2px solid #61dafb;
+      }
+    }
+  }
+
+  /* ---------- Main ---------- */
+  .compiler-main {
+    display: flex;
+    flex: 1;
+
+    .editor-pane {
+      flex: 2;
+      border-right: 1px solid #3a3a3a;
+      transition: opacity 0.3s ease;
+    }
+
+    .output-pane {
+      flex: 1;
+      background: #1b1b1b;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      overflow-y: auto;
+
+      h2 {
+        color: #00c853;
+        border-bottom: 1px solid #333;
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.8rem;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-size: 0.9rem;
+        color: #dcdcdc;
+
+        &.error {
+          color: #ff5555;
+        }
+      }
+    }
+
+    .hide-mobile {
+      display: block;
+    }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .compiler-main {
+      flex-direction: column;
+
+      .editor-pane,
+      .output-pane {
+        height: calc(100vh - 160px);
+        border: none;
+      }
+
+      .hide-mobile {
+        display: none;
+      }
+
+      .show {
+        display: block;
+      }
+    }
+
+    .mobile-toggle {
+      display: flex;
+    }
+
+    .compiler-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+
+      .compiler-controls {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .compiler-header h1 {
+      font-size: 1rem;
+    }
+
+    .compiler-header .compiler-controls {
+      button {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.7rem;
+      }
+
+      .language-dropdown {
+        min-width: 130px;
+      }
+    }
+  }
+}

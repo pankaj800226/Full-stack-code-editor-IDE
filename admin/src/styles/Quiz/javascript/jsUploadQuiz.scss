@@ -1,0 +1,107 @@
+.quiz-form-container {
+  background: #1e1e1e;
+  padding: 2rem;
+  margin: 2rem auto;
+  border-radius: 16px;
+  max-width: 700px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+
+  &__title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #4cafef;
+  }
+
+  .quiz-form {
+    display: flex;
+    flex-direction: column;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+
+      label {
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #bbb;
+      }
+
+      input {
+        padding: 0.6rem 1rem;
+        border-radius: 12px;
+        border: none;
+        background: #2a2a2a;
+        color: #fff;
+        font-size: 1rem;
+
+        &:focus {
+          outline: 2px solid #4cafef;
+        }
+      }
+
+      textarea {
+        padding: 0.6rem 1rem;
+        border-radius: 12px;
+        border: none;
+        height: 35vh;
+        background: #2a2a2a;
+        color: #fff;
+        font-size: 1rem;
+
+        &:focus {
+          outline: 2px solid #4cafef;
+        }
+      }
+
+      select {
+        padding: 0.6rem 1rem;
+        border-radius: 12px;
+        border: none;
+        background: #2a2a2a;
+        color: #fff;
+        font-size: 1rem;
+
+        &:focus {
+          outline: 2px solid #4cafef;
+        }
+      }
+    }
+
+    .form-group__btn {
+      display: flex;
+      justify-content: center;
+
+      button {
+        background: #4cafef;
+        color: #fff;
+        border: none;
+        padding: 0.7rem 1.8rem;
+        border-radius: 20px;
+        font-size: 1rem;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: #379edc;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+      }
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .quiz-form-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .quiz-form .form-group input {
+    font-size: 0.95rem;
+  }
+}
