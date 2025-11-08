@@ -9,6 +9,7 @@ import "highlight.js/styles/github-dark.css";
 import { useParams } from "react-router-dom";
 
 interface Message {
+  // _id: string
   sender: "user" | "ai";
   text: string;
 }
@@ -20,6 +21,9 @@ const AiMessage = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const token = localStorage.getItem("TOKEN");
   const { id } = useParams()
+  const [disabled, setDisables] = useState(false)
+  // const [remaining, setRemaining] = useState<number>(2);
+
 
   useEffect(() => {
     const fetchMessage = async () => {
@@ -43,8 +47,17 @@ const AiMessage = () => {
     scrollToBottom();
   }, [aiMessages, loading]);
 
+  useEffect(() => {
+    const savedRemaining = localStorage.getItem("ai_remaining");
+    if (savedRemaining && Number(savedRemaining) <= 0) {
+      setDisables(true);
+    }
+  }, []);
+
   const handleSendMessage = async () => {
     if (!userQuery.trim()) return toast.error("Please enter a message.");
+    if (disabled) return toast.error("Daily limit reached! Try again tomorrow.");
+
     setAiMessages((prev) => [...prev, { sender: "user", text: userQuery }]);
     setLoading(true);
 
@@ -63,18 +76,61 @@ const AiMessage = () => {
       } else {
         toast.error("No response from AI");
       }
+
+      // // ✅ Save remaining queries in localStorage
+      // if (res.data?.remaining !== undefined) {
+      //   localStorage.setItem("ai_remaining", res.data.remaining);
+      // }
+
+      // // ✅ Disable button if limit reached
+      // if (res.data.remaining <= 0) {
+      //   setDisables(true);
+      //   toast("You have reached your 30 query limit for today!");
+      // }
+
+
     } catch (error) {
       console.error(error);
       toast.error("Error communicating with AI");
+
+      // if (error?.res?.status === 403) {
+      //   toast("Daily limit end! Try again tomorrow")
+      //   setDisables(true)
+      // }
+
     } finally {
       setUserQuery("");
       setLoading(false);
     }
   };
 
+
+  const handleDelete = async (id: string) => {
+    try {
+      await axios.delete(`${api}/api/ai/msg/delete${id}`)
+      // setAiMessages((prev) => prev.filter((d) => d._id !== id))
+
+    } catch (error) {
+      console.log(error);
+      toast.error(`error ${error} `, {
+        style: {
+          border: '1px solid #713200',
+          padding: '16px',
+          color: '#713200',
+        },
+        iconTheme: {
+          primary: '#713200',
+          secondary: '#FFFAEE',
+        },
+      })
+
+    }
+  }
+
+
   return (
     <div className="chatgpt-page">
-      
+
       <div className="chatgpt-messages">
         {aiMessages.length === 0 ? (
           <div className="no_data">
@@ -88,13 +144,13 @@ const AiMessage = () => {
                 }`}
             >
               <div className="chatgpt-bubble">
+                <button onClick={() => handleDelete(msg._id)}>Delete</button>
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   rehypePlugins={[rehypeHighlight]}
                 >
                   {msg.text}
                 </ReactMarkdown>
-
               </div>
             </div>
           ))
@@ -120,10 +176,16 @@ const AiMessage = () => {
             }
           }}
         />
-        <button onClick={handleSendMessage} disabled={loading}>
-          {loading ? "..." : "➤"}
+        <button onClick={handleSendMessage} disabled={loading || disabled}>
+          {disabled ? "Limit Reached" : loading ? "..." : "➤"}
         </button>
       </div>
+
+      {/* <div className="remaining-count">
+        {disabled
+          ? "Daily limit reached! Try again tomorrow."
+          : `Remaining queries today: ${remaining}`}
+      </div> */}
     </div>
   );
 };

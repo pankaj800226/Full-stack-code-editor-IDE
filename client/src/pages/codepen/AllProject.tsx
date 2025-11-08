@@ -1,32 +1,34 @@
-import { LucideDelete } from "lucide-react"
-import { Link } from "react-router-dom"
+import { LucideDelete } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Project } from "./NewProjectFolder";
 
 
-const AllProject = ({ allProject }) => {
 
-
-  return (
-    <div className="displayFolder_container">
-      {
-        allProject.length === 0 ? (
-          <h2>NewChat Not Found</h2>
-        ) : (
-          allProject?.findProject?.map((n) => (
-            <div key={n._id} className="folder_data">
-
-              <div className="folder_content">
-                <Link to={`/codepen/${n._id}`}>
-                  <p>{n.projectFolder}</p>
-                </Link>
-                <LucideDelete />
-              </div>
-
-            </div>
-          ))
-        )
-      }
-    </div>
-  )
+interface AllProjectProps {
+  filterSearch: Project[];
+  handleDelete: (id: string) => void
 }
 
-export default AllProject
+
+const AllProject: React.FC<AllProjectProps> = ({ filterSearch, handleDelete }) => {
+  return (
+    <div className="displayFolder_container">
+      {filterSearch.length === 0 ? (
+        <h2>Project Not Found</h2>
+      ) : (
+        filterSearch.map((n) => (
+          <div key={n._id} className="folder_data">
+            <div className="folder_content">
+              <Link to={`/codepen/${n._id}`}>
+                <p>{n.projectFolder}</p>
+              </Link>
+              <LucideDelete onClick={() => handleDelete(n._id)} style={{ cursor: "pointer" }} />
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+  );
+};
+
+export default AllProject;

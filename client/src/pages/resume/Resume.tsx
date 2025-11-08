@@ -8,13 +8,13 @@ const Resume = () => {
     const resumeTemplete = [
         {
             id: 1,
-            templete: template1,
+            templete: template2,
             title: "Classic",
             path: "/templete1"
         },
         {
             id: 2,
-            templete: template2,
+            templete: template1,
             title: "Modern",
             path: "/template2"
         },

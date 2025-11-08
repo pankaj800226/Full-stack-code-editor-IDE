@@ -43,7 +43,7 @@ const AiChatBtn = React.lazy(() => import('./components/AiChatBtn'))
 const CodeEditor = React.lazy(() => import('./pages/Compiler/Editor'))
 
 //ai
-const NewChat = React.lazy(() => import('./pages/ai/NewChat'))
+const NewChat = React.lazy(() => import('./pages/ai/NewChatFolder'))
 const AiMessage = React.lazy(() => import('./pages/ai/Ai'))
 
 //resume
@@ -53,7 +53,7 @@ const Template2 = React.lazy(() => import('./pages/resume/Template2'))
 
 //codepen editor
 const CodePen = React.lazy(() => import('./pages/codepen/CodePen'))
-const NewProject = React.lazy(() => import('./pages/codepen/NewProject'))
+const NewProject = React.lazy(() => import('./pages/codepen/NewProjectFolder'))
 
 
 

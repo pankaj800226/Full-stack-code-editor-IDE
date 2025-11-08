@@ -47,7 +47,7 @@ const CodePen = () => {
         }
 
         fetchCode()
-    }, [token])
+    }, [token, id])
 
 
     // Live preview update

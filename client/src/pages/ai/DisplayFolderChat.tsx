@@ -2,10 +2,11 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { LucideDelete } from 'lucide-react'
-
+import { NewChat } from './NewChatFolder'
 interface debouncedType {
-    _id: string
-    filterSearch: string
+    // _id: string
+    filterSearch: NewChat[]
+    handleDelete: (id: string) => void
 }
 
 const DisplayFolderChat: React.FC<debouncedType> = ({ filterSearch, handleDelete }) => {

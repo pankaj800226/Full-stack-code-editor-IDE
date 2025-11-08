@@ -18,7 +18,7 @@ import { api } from "../../Api/api";
 import DisplayFolderChat from "./DisplayFolderChat";
 import { useDebounce } from "../../hooks/useDebounceCourse";
 
-interface NewChat {
+export interface NewChat {
   _id: string
   folderName: string
 }
@@ -34,6 +34,8 @@ const NewChat = () => {
   const [search, setSearch] = useState('')
 
   const debouncedSearch = useDebounce(search, 500)
+
+
 
   const handleCreate = async () => {
     if (folderName) {

@@ -16,6 +16,14 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { api } from "../../Api/api";
 import Loading from "../../components/Loading";
+import { useDebounce } from "../../hooks/useDebounceCourse";
+
+export interface Project {
+  _id: string;
+  projectFolder: string;
+}
+
+
 const NewProject = () => {
   const [editDialogOpen, setEditDialogOpen] = useState(false)
   const theme = useTheme();
@@ -23,15 +31,17 @@ const NewProject = () => {
   const [projectFolder, setProjectName] = useState('')
   const token = localStorage.getItem('TOKEN')
 
-  const [allProject, setAllProject] = useState([])
+  const [allProject, setAllProject] = useState<Project[]>([])
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [search, setSearch] = useState('')
+
+  const debounceSearch = useDebounce(search, 500)
 
 
   const handleCreate = async () => {
     if (projectFolder) {
       try {
-
         const res = await axios.post(`${api}/api/codepenproject/create/project`, { projectFolder }, {
           headers: { Authorization: `Bearer ${token}` }
         })
@@ -86,6 +96,7 @@ const NewProject = () => {
   }
 
 
+  // find codepen project list
   useEffect(() => {
     const fetchProject = async () => {
       setLoading(true)
@@ -106,21 +117,54 @@ const NewProject = () => {
     fetchProject()
   }, [token])
 
+
+  const filterSearch = allProject.filter((item) =>
+    item.projectFolder.toLowerCase().includes(debounceSearch.toLowerCase())
+  );
+
+
+  const handleDelete = async (id: string) => {
+    try {
+      await axios.delete(`${api}/api/codepenproject/delete/folder/${id}`)
+
+      setAllProject((prev) => prev.filter((d) => d._id !== id))
+
+      toast.success(`Chat Deleted `, {
+        position: "bottom-right",
+        style: {
+          border: '1px solid #713200',
+          padding: '16px',
+          color: '#713200',
+        },
+        iconTheme: {
+          primary: '#713200',
+          secondary: '#FFFAEE',
+        },
+      })
+
+    } catch (error) {
+      console.log(error);
+      toast.error("error")
+
+    }
+  }
+
   if (error) return <p>{error}</p>
   if (loading) return <Loading />
+
   return (
     <>
       <div className="new_chat_header">
         <input type="text"
           className="input"
           placeholder="Search Folder Name"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
         <CircleFadingPlus onClick={() => setEditDialogOpen(true)} />
       </div>
-      <AllProject
-        allProject={allProject}
 
-      />
+      <AllProject filterSearch={filterSearch} handleDelete={handleDelete} />
 
       <Dialog
         open={editDialogOpen} onClose={() => setEditDialogOpen(false)}
