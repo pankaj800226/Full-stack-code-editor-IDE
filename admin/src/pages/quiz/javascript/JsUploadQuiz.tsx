@@ -13,6 +13,7 @@ const JsUploadQuiz = () => {
     const [answer, setAnswer] = useState('')
     const [error, setError] = useState('')
     const [loader, setLoader] = useState(false)
+    
 
 
     const handleJsQuiz = async (e: FormEvent) => {

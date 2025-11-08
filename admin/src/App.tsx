@@ -24,8 +24,6 @@ const JsEdit = React.lazy(() => import('./pages/quiz/javascript/JsEdit'))
 
 
 
-
-
 const App = () => {
   return (
     <Router >

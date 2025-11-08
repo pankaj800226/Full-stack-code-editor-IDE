@@ -28,7 +28,6 @@ const JsEdit = () => {
                 setAnswer(res.data.answer)
             } catch (error) {
                 console.log(error);
-
             }
         }
 
